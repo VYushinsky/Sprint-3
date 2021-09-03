@@ -3,16 +3,20 @@ package ru.sber.oop
 data class User(val name: String, val age: Long) {
     lateinit var city: String
     override fun equals(other: Any?): Boolean {
-        return super.equals(other)
+        if (other == null || other !is User){
+            return false
+        }else return name == other.name && age == other.age && city == other.city
+
     }
 }
+
 
 fun main() {
     val user1 = User("Alex", 13)
     user1.city  = "Omsk"
     val user2 = user1.copy(name = "Alice")
     val user3 = user1.copy()
-    user3.city  = "Tomsk"
+    user3.city  = "Omsk"
     print(user3.equals(user1))
 }
 

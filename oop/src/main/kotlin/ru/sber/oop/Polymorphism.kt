@@ -12,9 +12,13 @@ interface Fightable {
 class Player(val name: String, val isBlessed: Boolean, override val powerType: String, override var healthPoints: Int): Fightable {
 
     override fun attack(opponent: Fightable): Int {
-        return if (isBlessed) {
-            damageRoll * 2
-        } else damageRoll
+        if (isBlessed) {
+            opponent.healthPoints = opponent.healthPoints - damageRoll * 2
+            return opponent.healthPoints
+        } else {
+            opponent.healthPoints = opponent.healthPoints - damageRoll
+            return opponent.healthPoints
+        }
     }
 }
 
